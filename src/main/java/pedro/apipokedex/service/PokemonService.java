@@ -1,12 +1,18 @@
 package pedro.apipokedex.service;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import pedro.apipokedex.VO.PokemonVO;
 import pedro.apipokedex.entity.Pokemon;
 import pedro.apipokedex.repository.PokemonRepository;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -15,17 +21,17 @@ public class PokemonService {
     @Autowired
     private PokemonRepository pokemonRepository;
 
-    public PokemonVO criarPokemon(PokemonVO pokemonVO){
+    public void criarPokemon(String nome, String tipo, MultipartFile arquivo) throws IOException {
 
         Pokemon pokemon = new Pokemon();
+        byte[] image = Base64.encodeBase64(arquivo.getBytes());
+        String result = image.toString();
 
-        pokemon.setNome(pokemonVO.getNome());
-        pokemon.setId(pokemonVO.getId());
-        pokemon.setTipo(pokemonVO.getTipo());
-        pokemon.setImagem(pokemonVO.getImagem());
+        pokemon.setNome(nome);
+        pokemon.setTipo(tipo);
+        pokemon.setImagem(result);
 
         pokemonRepository.save(pokemon);
-        return pokemonVO;
     }
 
     public List<PokemonVO> listarPokemon(){
