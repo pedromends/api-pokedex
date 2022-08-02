@@ -22,13 +22,7 @@ public class PokemonController {
 
     @PostMapping("/criar")
     public ResponseEntity<Object> criarPokemon(@RequestParam("nome")String nome, @RequestParam("tipo")String tipo, @RequestParam("file")MultipartFile arquivo) throws IOException {
-
-        try{
-            pokemonService.criarPokemon(nome, tipo, arquivo);
-        }catch(Error error){
-            System.out.println(error);
-        }
-
+        pokemonService.criarPokemon(nome, tipo, arquivo);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
