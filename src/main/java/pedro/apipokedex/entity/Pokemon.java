@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_pokemon", schema = "public")
+@Table(name = "tb_pokemon", schema = "pokedex")
 @SequenceGenerator(name = "tb_pokemon", sequenceName = "seq_tb_pokemon", allocationSize = 1)
 @Getter
 @Setter
@@ -17,7 +17,7 @@ public class Pokemon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_tb_pokemon")
-    @Column
+    @Column(name = "seq_pokemon")
     private Long id;
 
     @Column(name = "nome")

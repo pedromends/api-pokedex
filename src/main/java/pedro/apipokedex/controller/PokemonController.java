@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/pokemon")
+@RequestMapping("/pokedex")
 public class PokemonController {
 
     @Autowired
