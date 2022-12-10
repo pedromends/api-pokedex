@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.web.multipart.MultipartFile;
 import pedro.apipokedex.entity.Pokemon;
 
 @Data
@@ -15,11 +16,12 @@ public class PokemonVO {
 
     private String nome;
     private String tipo;
+
     private String imagem;
 
     public PokemonVO(Pokemon pokemon){
         this.nome = pokemon.getNome();
         this.tipo = pokemon.getTipo();
-        this.imagem = pokemon.getImagem();
+		this.imagem = pokemon.getImagem();
     }
 }

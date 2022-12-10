@@ -10,7 +10,10 @@ import pedro.apipokedex.VO.PokemonVO;
 import pedro.apipokedex.entity.Pokemon;
 import pedro.apipokedex.repository.PokemonRepository;
 
+import java.awt.*;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +26,12 @@ public class PokemonService {
     public void criarPokemon(String nome, String tipo, MultipartFile arquivo) throws IOException {
 
         Pokemon pokemon = new Pokemon();
-        byte[] arr = arquivo.getBytes();
+		byte[] arr = arquivo.getBytes();
         String img = Base64.encodeBase64String(arr);
 
         pokemon.setNome(nome);
         pokemon.setTipo(tipo);
         pokemon.setImagem(img);
-
         pokemonRepository.save(pokemon);
     }
 

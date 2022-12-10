@@ -16,7 +16,8 @@ import java.util.Objects;
 public class Pokemon {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_tb_pokemon")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pokedex.seq_tb_pokemon")
+	@SequenceGenerator(name="seq_tb_pokemon", sequenceName="seq_tb_pokemon")
     @Column(name = "seq_pokemon")
     private Long id;
 

@@ -1,5 +1,6 @@
 package pedro.apipokedex.controller;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -21,8 +22,8 @@ public class PokemonController {
     PokemonService pokemonService;
 
     @PostMapping("/criar")
-    public ResponseEntity<Object> criarPokemon(@RequestParam("nome")String nome, @RequestParam("tipo")String tipo, @RequestParam("file")MultipartFile arquivo) throws IOException {
-        pokemonService.criarPokemon(nome, tipo, arquivo);
+    public ResponseEntity<Object> criarPokemon(@RequestParam("nome")String nome, @RequestParam("tipo")String tipo, @RequestParam("imagem")MultipartFile imagem) throws IOException {
+		pokemonService.criarPokemon(nome, tipo, imagem);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
