@@ -14,12 +14,14 @@ import pedro.apipokedex.entity.Pokemon;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PokemonVO {
 
+	private Long id;
     private String nome;
     private String tipo;
 
     private String imagem;
 
     public PokemonVO(Pokemon pokemon){
+		this.id  = pokemon.getId();
         this.nome = pokemon.getNome();
         this.tipo = pokemon.getTipo();
 		this.imagem = pokemon.getImagem();

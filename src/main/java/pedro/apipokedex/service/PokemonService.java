@@ -40,15 +40,22 @@ public class PokemonService {
         List<PokemonVO> listaVO = new ArrayList<>();
         List<Pokemon> lista = pokemonRepository.findAll();
 
-        for(Pokemon poke : lista){
+        for(Pokemon poke : lista)
             listaVO.add(new PokemonVO(poke));
-        }
 
         return listaVO;
     }
 
-    public PokemonVO atualizarPokemon(){
-        return new PokemonVO();
+    public void atualizarPokemon(Long id, String nome, String tipo, MultipartFile arquivo) throws IOException {
+
+		Pokemon pokemon = pokemonRepository.getById(id);
+		byte[] arr = arquivo.getBytes();
+		String img = Base64.encodeBase64String(arr);
+
+		pokemon.setNome(nome);
+		pokemon.setTipo(tipo);
+		pokemon.setImagem(img);
+		pokemonRepository.save(pokemon);
     }
 
     public PokemonVO deletarPokemon(){

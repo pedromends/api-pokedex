@@ -22,7 +22,9 @@ public class PokemonController {
     PokemonService pokemonService;
 
     @PostMapping("/criar")
-    public ResponseEntity<Object> criarPokemon(@RequestParam("nome")String nome, @RequestParam("tipo")String tipo, @RequestParam("imagem")MultipartFile imagem) throws IOException {
+    public ResponseEntity<Object> criarPokemon(@RequestParam("nome")String nome,
+											   @RequestParam("tipo")String tipo,
+											   @RequestParam("imagem")MultipartFile imagem) throws IOException {
 		pokemonService.criarPokemon(nome, tipo, imagem);
         return ResponseEntity.ok(HttpStatus.OK);
     }
@@ -32,12 +34,16 @@ public class PokemonController {
         return new ResponseEntity<>(pokemonService.listarPokemon(), HttpStatus.OK);
     }
 
-    /*@GetMapping("/atualizar")
-    public ResponseEntity<Object> atualizarPokemon()  {
-        return new ResponseEntity<>(pokemonService.atualizarPokemon());
+    @PutMapping("/atualizar")
+    public ResponseEntity<Object> atualizarPokemon(@RequestParam("id")Long id,
+												   @RequestParam("nome")String nome,
+												   @RequestParam("tipo")String tipo,
+												   @RequestParam("imagem")MultipartFile imagem) throws IOException {
+        pokemonService.atualizarPokemon(id, nome, tipo, imagem);
+		return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping("/deletar")
+    /*@GetMapping("/deletar")
     public ResponseEntity<Object> deletarPokemon()  {
         return new ResponseEntity<>(pokemonService.deletarPokemon());
     }*/
