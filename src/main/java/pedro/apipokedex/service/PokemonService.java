@@ -3,17 +3,13 @@ package pedro.apipokedex.service;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import pedro.apipokedex.VO.PokemonVO;
 import pedro.apipokedex.entity.Pokemon;
 import pedro.apipokedex.repository.PokemonRepository;
 
-import java.awt.*;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +54,8 @@ public class PokemonService {
 		pokemonRepository.save(pokemon);
     }
 
-    public PokemonVO deletarPokemon(){
-        return new PokemonVO();
+    public HttpStatus deletarPokemon(Long id){
+		pokemonRepository.deleteById(id);
+		return HttpStatus.OK;
     }
 }

@@ -43,9 +43,9 @@ public class PokemonController {
 		return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    /*@GetMapping("/deletar")
-    public ResponseEntity<Object> deletarPokemon()  {
-        return new ResponseEntity<>(pokemonService.deletarPokemon());
-    }*/
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity deletarPokemon(@PathVariable Long id)  {
+        return new ResponseEntity<>(pokemonService.deletarPokemon(id));
+    }
 
 }
