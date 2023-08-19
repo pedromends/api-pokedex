@@ -7,8 +7,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_pokemon", schema = "pokedex")
-@SequenceGenerator(name = "tb_pokemon", sequenceName = "seq_tb_pokemon", allocationSize = 1)
+@Table(name = "pokemon", schema = "pokedex")
 @Getter
 @Setter
 @ToString
@@ -16,15 +15,14 @@ import java.util.Objects;
 public class Pokemon {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pokedex.seq_tb_pokemon")
-	@SequenceGenerator(name="seq_tb_pokemon", sequenceName="seq_tb_pokemon")
-    @Column(name = "seq_pokemon")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "name")
     private String nome;
 
-    @Column(name = "tipo")
+    @Column(name = "type")
     private String tipo;
 
     @Column(name = "img")
