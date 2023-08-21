@@ -20,13 +20,13 @@ public class Pokemon {
     private Long id;
 
     @Column(name = "name")
-    private String nome;
+    private String name;
 
     @Column(name = "type")
-    private String tipo;
+    private String type;
 
     @Column(name = "img")
-    private String imagem;
+    private String img;
 
     @Override
     public boolean equals(Object o) {

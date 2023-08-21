@@ -12,6 +12,7 @@ import pedro.apipokedex.repository.PokemonRepository;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PokemonService {
@@ -19,42 +20,47 @@ public class PokemonService {
     @Autowired
     private PokemonRepository pokemonRepository;
 
-    public void criarPokemon(String nome, String tipo, MultipartFile arquivo) throws IOException {
+    public void createPokemon(String name, String type, MultipartFile arch) throws IOException {
 
         Pokemon pokemon = new Pokemon();
-		byte[] arr = arquivo.getBytes();
+		byte[] arr = arch.getBytes();
         String img = Base64.encodeBase64String(arr);
 
-        pokemon.setNome(nome);
-        pokemon.setTipo(tipo);
-        pokemon.setImagem(img);
+        pokemon.setName(name);
+        pokemon.setType(type);
+        pokemon.setImg(img);
         pokemonRepository.save(pokemon);
     }
 
-    public List<PokemonVO> listarPokemon(){
+    public List<PokemonVO> listPokemon(){
 
-        List<PokemonVO> listaVO = new ArrayList<>();
-        List<Pokemon> lista = pokemonRepository.findAll();
+        List<PokemonVO> listVO = new ArrayList<>();
+        List<Pokemon> list = pokemonRepository.findAll();
 
-        for(Pokemon poke : lista)
-            listaVO.add(new PokemonVO(poke));
+        for(Pokemon poke : list)
+            listVO.add(new PokemonVO(poke));
 
-        return listaVO;
+        return listVO;
     }
 
-    public void atualizarPokemon(Long id, String nome, String tipo, MultipartFile arquivo) throws IOException {
+    public void updatePokemon(Long id, String nome, String tipo, String oldimg, Optional<MultipartFile> img) throws IOException {
 
 		Pokemon pokemon = pokemonRepository.getById(id);
-		byte[] arr = arquivo.getBytes();
-		String img = Base64.encodeBase64String(arr);
 
-		pokemon.setNome(nome);
-		pokemon.setTipo(tipo);
-		pokemon.setImagem(img);
+		pokemon.setName(nome);
+		pokemon.setType(tipo);
+
+        if(img.isPresent()){
+            byte[] arr = img.get().getBytes();
+            String bytes = Base64.encodeBase64String(arr);
+            pokemon.setImg(bytes);
+        }else
+            pokemon.setImg(oldimg);
+
 		pokemonRepository.save(pokemon);
     }
 
-    public HttpStatus deletarPokemon(Long id){
+    public HttpStatus deletePokemon(Long id){
 		pokemonRepository.deleteById(id);
 		return HttpStatus.OK;
     }

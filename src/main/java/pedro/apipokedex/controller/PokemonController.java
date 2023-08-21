@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pedro.apipokedex.service.PokemonService;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
@@ -22,27 +23,27 @@ public class PokemonController {
     public ResponseEntity<Object> criarPokemon(@RequestParam("name")String nome,
 											   @RequestParam("type")String tipo,
 											   @RequestParam("img")MultipartFile imagem) throws IOException {
-		pokemonService.criarPokemon(nome, tipo, imagem);
+		pokemonService.createPokemon(nome, tipo, imagem);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping("/listar")
     public ResponseEntity<Object> listarPokemon()  {
-        return new ResponseEntity<>(pokemonService.listarPokemon(), HttpStatus.OK);
+        return new ResponseEntity<>(pokemonService.listPokemon(), HttpStatus.OK);
     }
 
     @PutMapping("/atualizar")
     public ResponseEntity<Object> atualizarPokemon(@RequestParam("id")Long id,
-												   @RequestParam("nome")String nome,
-												   @RequestParam("tipo")String tipo,
-												   @RequestParam("imagem")MultipartFile imagem) throws IOException {
-        pokemonService.atualizarPokemon(id, nome, tipo, imagem);
+												   @RequestParam("name")String nome,
+												   @RequestParam("type")String tipo,
+                                                   @RequestParam("img") Optional<MultipartFile> img,
+												   @RequestParam("oldimg")String oldimg) throws IOException {
+        pokemonService.updatePokemon(id, nome, tipo, oldimg, img);
 		return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @DeleteMapping("/deletar/{id}")
     public ResponseEntity deletarPokemon(@PathVariable Long id)  {
-        return new ResponseEntity<>(pokemonService.deletarPokemon(id));
+        return new ResponseEntity<>(pokemonService.deletePokemon(id));
     }
-
 }

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.util.codec.binary.Base64;
-import org.springframework.web.multipart.MultipartFile;
 import pedro.apipokedex.entity.Pokemon;
 
 @Data
@@ -15,15 +13,14 @@ import pedro.apipokedex.entity.Pokemon;
 public class PokemonVO {
 
 	private Long id;
-    private String nome;
-    private String tipo;
-
-    private String imagem;
+    private String name;
+    private String type;
+    private String img;
 
     public PokemonVO(Pokemon pokemon){
 		this.id  = pokemon.getId();
-        this.nome = pokemon.getNome();
-        this.tipo = pokemon.getTipo();
-		this.imagem = pokemon.getImagem();
+        this.name = pokemon.getName();
+        this.type = pokemon.getType();
+		this.img = pokemon.getImg();
     }
 }
